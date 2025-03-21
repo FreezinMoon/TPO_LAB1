@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class LeftistHeap {
-    // Лог для трассировки "A, B, C, D, E, F"
     private final List<String> trace = new ArrayList<>();
     private Node root;
 
@@ -12,7 +11,6 @@ public class LeftistHeap {
      * Вставка элемента.
      */
     public void insert(int key) {
-        // По желанию очищаем трассировку, чтобы фиксировать исключительно текущее действие.
         clearTrace();
 
         Node newNode = new Node(key);
@@ -26,7 +24,6 @@ public class LeftistHeap {
         if (root == null) {
             throw new IllegalStateException("Heap is empty");
         }
-        // Сбрасываем трассировку, чтобы смотреть именно на удаление.
         clearTrace();
 
         int minKey = root.key;
@@ -38,7 +35,6 @@ public class LeftistHeap {
      * Очистка кучи: делаем её пустой.
      */
     public void clearHeap() {
-        // Можно очистить трассировку для консистентности.
         clearTrace();
         root = null;
     }
@@ -68,7 +64,7 @@ public class LeftistHeap {
     }
 
     /**
-     * Явно очищает трассировку (если хотим вручную контролировать).
+     * Явно очищает трассировку.
      */
     public void clearTrace() {
         trace.clear();

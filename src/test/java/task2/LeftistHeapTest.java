@@ -17,9 +17,8 @@ public class LeftistHeapTest {
     public void testInsertTrace() {
         LeftistHeap heap = new LeftistHeap();
 
-        // Вставляем 10
         heap.insert(10);
-        // Проверяем трассировку: merge(null, newNode) -> "A"
+
         assertEquals(List.of("A"), heap.getTrace(),
                 "После вставки первого элемента (10) должна быть точка A");
 
@@ -40,11 +39,10 @@ public class LeftistHeapTest {
     @Test
     public void testRemoveSmallestTrace() {
         LeftistHeap heap = new LeftistHeap();
-        heap.insert(10); // => A
-        heap.insert(5);  // => C, D, A, E, F
-        heap.insert(7);  // => C, D, B, E, F
+        heap.insert(10);
+        heap.insert(5);
+        heap.insert(7);
 
-        // Очищаем трассировку перед удалением, чтобы смотреть только на цепочку removeSmallest().
         heap.clearTrace();
 
         int min = heap.removeSmallest();
@@ -65,9 +63,7 @@ public class LeftistHeapTest {
         heap.insert(10);
         heap.insert(5);
 
-        // Сбрасываем лог
         heap.clearTrace();
-        // Вызываем очистку
         heap.clearHeap();
 
         assertTrue(heap.getTrace().isEmpty(),
@@ -88,11 +84,9 @@ public class LeftistHeapTest {
         for (int v : values) {
             heap.insert(v);
         }
-        // Проверим, что минимальный — 1
+
         assertEquals(1, heap.removeSmallest());
-        // Следующий — 2
         assertEquals(2, heap.removeSmallest());
-        // и т.д.
         assertEquals(3, heap.removeSmallest());
         assertEquals(4, heap.removeSmallest());
         assertEquals(5, heap.removeSmallest());
@@ -111,7 +105,6 @@ public class LeftistHeapTest {
         for (int v : values) {
             heap.insert(v);
         }
-        // Удаляем все, ожидая 1..5 по возрастанию
         for (int i = 1; i <= 5; i++) {
             int min = heap.removeSmallest();
             assertEquals(i, min,
@@ -139,13 +132,11 @@ public class LeftistHeapTest {
         LeftistHeap heap = new LeftistHeap();
         heap.insert(1);
         heap.insert(2);
+
         heap.clearHeap();
-        // После первого clearHeap куча пустая
         assertTrue(heap.isEmpty());
 
-        // Второй clearHeap не должен приводить к ошибкам
         heap.clearHeap();
-        // Всё ещё пустая
         assertTrue(heap.isEmpty());
     }
 
@@ -161,20 +152,17 @@ public class LeftistHeapTest {
     public void testRandomInsertAndRemove() {
         LeftistHeap heap = new LeftistHeap();
 
-        // Генерируем случайные числа
         Random rand = new Random();
         int testSize = 10;
         int[] arr = new int[testSize];
         for (int i = 0; i < testSize; i++) {
-            arr[i] = rand.nextInt(100) + 1; // [1..100]
+            arr[i] = rand.nextInt(100) + 1;
             heap.insert(arr[i]);
         }
 
-        // Сортируем копию массива, чтобы знать ожидаемый порядок
         int[] sorted = arr.clone();
         java.util.Arrays.sort(sorted);
 
-        // Удаляем из кучи, сравниваем
         for (int i = 0; i < testSize; i++) {
             int minFromHeap = heap.removeSmallest();
             assertEquals(sorted[i], minFromHeap,
