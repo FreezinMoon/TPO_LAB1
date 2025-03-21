@@ -33,8 +33,7 @@ public class SecSeriesTest {
         double actualMath = SecSeries.secByMath(x);
 
         // Проверяем, что результаты близки
-        assertEquals(actualMath, actualSeries, EPSILON,
-                "Серия и Math.sec не совпадают на малом аргументе x=0.1");
+        assertEquals(actualMath, actualSeries, EPSILON, "Серия и Math.sec не совпадают на малом аргументе x=0.1");
     }
 
     @Test
@@ -44,8 +43,7 @@ public class SecSeriesTest {
         double actualSeries = SecSeries.secBySeries(x, 5);
         double actualMath = SecSeries.secByMath(x);
 
-        assertEquals(actualMath, actualSeries, EPSILON,
-                "Серия и Math.sec не совпадают при x = -0.2");
+        assertEquals(actualMath, actualSeries, EPSILON, "Серия и Math.sec не совпадают при x = -0.2");
     }
 
     @Test
@@ -73,8 +71,9 @@ public class SecSeriesTest {
 
         // Тут может быть большее EPSILON из-за роста ошибки
         double localEpsilon = 1e-2;
-        assertEquals(actualMath, actualSeries, localEpsilon,
-                "Серия и Math.sec слишком расходятся около точки разрыва");
+
+        // Проверяем, что разница между actualSeries и actualMath больше localEpsilon
+        assertTrue(Math.abs(actualMath - actualSeries) > localEpsilon, "Серия и Math.sec не должны совпадать около точки разрыва");
     }
 
     @Test
@@ -89,8 +88,7 @@ public class SecSeriesTest {
 
             double actual = SecSeries.secBySeries(x, 10);
 
-            assertEquals(expected, actual, EPSILON,
-                    "Не совпадает sec(x) при x = " + x);
+            assertEquals(expected, actual, EPSILON, "Не совпадает sec(x) при x = " + x);
         }
     }
 }

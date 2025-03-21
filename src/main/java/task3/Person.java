@@ -48,11 +48,5 @@ public class Person {
         // Допустим, тело не отпускает предмет автоматически.
         // Но мы всё равно "придавливаем" kilobac.
         kilobac.setSteppedOn(true);
-
-        // Если хотите "освободить" предмет из рук тела при нажатии, можно так:
-        // kilobac.setHeldByBody(false);
-        // body.setItem(null);
-
-        // Иная логика по желанию.
     }
 }

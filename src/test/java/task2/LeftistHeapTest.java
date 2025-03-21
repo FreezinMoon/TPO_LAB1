@@ -11,7 +11,7 @@ import static org.junit.jupiter.api.Assertions.*;
 public class LeftistHeapTest {
 
     /**
-     * 1. Тест базовой вставки и сравнения трассировки (как раньше).
+     * 1. Тест базовой вставки и сравнения трассировки.
      */
     @Test
     public void testInsertTrace() {
@@ -23,16 +23,12 @@ public class LeftistHeapTest {
         assertEquals(List.of("A"), heap.getTrace(),
                 "После вставки первого элемента (10) должна быть точка A");
 
-        // Вставляем 5
         heap.insert(5);
-        // Ожидаем (C, D, A, E, F) — может немного отличаться
         List<String> expectedTrace5 = List.of("C", "D", "A", "E", "F");
         assertEquals(expectedTrace5, heap.getTrace(),
                 "Неверная трассировка при вставке 5");
 
-        // Вставляем 7
         heap.insert(7);
-        // Примерная ожидаемая последовательность
         List<String> expectedTrace7 = List.of("C", "D", "A", "E", "F");
         assertEquals(expectedTrace7, heap.getTrace(),
                 "Неверная трассировка при вставке 7");
@@ -46,7 +42,7 @@ public class LeftistHeapTest {
         LeftistHeap heap = new LeftistHeap();
         heap.insert(10); // => A
         heap.insert(5);  // => C, D, A, E, F
-        heap.insert(7);  // => C, D, B, E, F (пример)
+        heap.insert(7);  // => C, D, B, E, F
 
         // Очищаем трассировку перед удалением, чтобы смотреть только на цепочку removeSmallest().
         heap.clearTrace();
@@ -54,7 +50,6 @@ public class LeftistHeapTest {
         int min = heap.removeSmallest();
         assertEquals(5, min, "Минимальным должен был быть 5");
 
-        // Примерная цепочка: "C","D","B","E","F"
         List<String> expectedTrace = List.of("C", "D", "A", "E", "F");
         assertEquals(expectedTrace, heap.getTrace(),
                 "Неверная трассировка при удалении минимума");
@@ -107,8 +102,6 @@ public class LeftistHeapTest {
     /**
      * 5. Тест вставки в убывающем порядке (5..1), чтобы посмотреть,
      * корректно ли обрабатывается порядок и npl.
-     * Тут трассировку можно проверить, но
-     * в основном смотрим, что всё удаляется в порядке возрастания.
      */
     @Test
     public void testInsertDecreasingAndRemove() {
